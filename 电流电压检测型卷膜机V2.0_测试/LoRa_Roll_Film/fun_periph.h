@@ -20,8 +20,8 @@
 #define SW_FUN1             PC8 //Button1
 #define SW_FUN2             PC7 //Button2
 
-enum LED{
-    RED1, RED2, GREEN1, GREEN2
+enum LED {
+	RED1, RED2, GREEN1, GREEN2
 };
 
 /*LED GPIO switch*/
@@ -46,16 +46,16 @@ enum LED{
 #define LED_SELF_CHECK_ERROR        (Some_Peripheral.LED_Display(RED2, 5))
 #define LED_SET_LORA_PARA_ERROR     (Some_Peripheral.LED_Display(RED2, 20))
 
-class Some_Peripherals{
+class Some_Peripherals {
 public:
-    /*Configurate some functional pins*/
-    void Peripheral_GPIO_Config(void);
-    void LED_Display(LED which_led, unsigned char freq);
-    void Stop_LED(void);
-    void Start_LED(void);
+	/*Configurate some functional pins*/
+	void Peripheral_GPIO_Config(void);
+	void LED_Display(LED which_led, unsigned char freq);
+	void Stop_LED(void);
+	void Start_LED(void);
 
-    void Key_Buzz(unsigned int d); //800ms  1000 times.
-    //void Alarm(unsigned int d);
+	void Key_Buzz(unsigned int d); //800ms  1000 times.
+	//void Alarm(unsigned int d);
 };
 
 void LED_Interrupt(void);

@@ -20,7 +20,7 @@ volatile bool gCheckStoreParamFlag = false;
  */
 void Check_LoRa_Parameter(void)
 {
-    LoRa_MHL9LF.Parameter_Init(false);
+	LoRa_MHL9LF.Parameter_Init(false);
 }
 
 /*
@@ -30,55 +30,55 @@ void Check_LoRa_Parameter(void)
  */
 void Check_Store_Parameter(void)
 {
-    unsigned char SN_Temp[9];
+	unsigned char SN_Temp[9];
 
-    while(!SN.Self_check(SN_Temp))
-    {
-        Serial.println("SN code check ERROR !!! Applying SN code to server... <Check_Store_Parameter>");
-        Message_Receipt.Request_Device_SN_and_Channel();
-        LoRa_Command_Analysis.Receive_LoRa_Cmd();
-        delay(WAIT_TIME);
-        iwdg_feed();
-        SelfCheckTryNum++;
+	while (!SN.Self_check(SN_Temp))
+	{
+		Serial.println("SN code check ERROR !!! Applying SN code to server... <Check_Store_Parameter>");
+		Message_Receipt.Request_Device_SN_and_Channel();
+		LoRa_Command_Analysis.Receive_LoRa_Cmd();
+		delay(WAIT_TIME);
+		iwdg_feed();
+		SelfCheckTryNum++;
 
-        if (SelfCheckTryNum > 50)
-        {
-            nvic_sys_reset(); 
-        }
-    }
-    SelfCheckTryNum = 0;
+		if (SelfCheckTryNum > 50)
+		{
+			nvic_sys_reset();
+		}
+	}
+	SelfCheckTryNum = 0;
 
-    while (!Roll_Operation.Check_Group_Number())
-    {
-        Serial.println("Group number check ERROR !!! Applying group number to server... <Check_Store_Parameter>");
-        Message_Receipt.Request_Set_Group_Number();
-        LoRa_Command_Analysis.Receive_LoRa_Cmd();
-        delay(WAIT_TIME);
-        iwdg_feed();
-        SelfCheckTryNum++;
+	while (!Roll_Operation.Check_Group_Number())
+	{
+		Serial.println("Group number check ERROR !!! Applying group number to server... <Check_Store_Parameter>");
+		Message_Receipt.Request_Set_Group_Number();
+		LoRa_Command_Analysis.Receive_LoRa_Cmd();
+		delay(WAIT_TIME);
+		iwdg_feed();
+		SelfCheckTryNum++;
 
-        if (SelfCheckTryNum > 50)
-        {
-            nvic_sys_reset(); 
-        }
-    }
-    SelfCheckTryNum = 0;
+		if (SelfCheckTryNum > 50)
+		{
+			nvic_sys_reset();
+		}
+	}
+	SelfCheckTryNum = 0;
 
-    while (!Roll_Operation.Check_Area_Number())
-    {
-        Serial.println("Area number check ERROR !!! Applying area number to server... <Check_Store_Parameter>");
-        Message_Receipt.Request_Device_SN_and_Channel();
-        LoRa_Command_Analysis.Receive_LoRa_Cmd();
-        delay(WAIT_TIME);
-        iwdg_feed();
-        SelfCheckTryNum++;
+	while (!Roll_Operation.Check_Area_Number())
+	{
+		Serial.println("Area number check ERROR !!! Applying area number to server... <Check_Store_Parameter>");
+		Message_Receipt.Request_Device_SN_and_Channel();
+		LoRa_Command_Analysis.Receive_LoRa_Cmd();
+		delay(WAIT_TIME);
+		iwdg_feed();
+		SelfCheckTryNum++;
 
-        if (SelfCheckTryNum > 50)
-        {
-            nvic_sys_reset(); 
-        }
-    }
-    SelfCheckTryNum = 0;
+		if (SelfCheckTryNum > 50)
+		{
+			nvic_sys_reset();
+		}
+	}
+	SelfCheckTryNum = 0;
 }
 
 /*
@@ -88,18 +88,18 @@ void Check_Store_Parameter(void)
  */
 void Check_Store_Param_And_LoRa(void)
 {
-    if (gCheckStoreParamFlag)
-    {
-        gCheckStoreParamFlag = false;
-        Stop_Self_Check_Timing();
-        LED_SELF_CHECK_ERROR;
+	if (gCheckStoreParamFlag)
+	{
+		gCheckStoreParamFlag = false;
+		Stop_Self_Check_Timing();
+		LED_SELF_CHECK_ERROR;
 
-        Check_LoRa_Parameter();
-        Check_Store_Parameter();
+		Check_LoRa_Parameter();
+		Check_Store_Parameter();
 
-        Start_Self_Check_Timing();
-        LED_RUNNING;
-        Serial.println("All parameters check SUCCESS... <Check_Store_Parameter>");
-    }
+		Start_Self_Check_Timing();
+		LED_RUNNING;
+		Serial.println("All parameters check SUCCESS... <Check_Store_Parameter>");
+	}
 }
 

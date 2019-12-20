@@ -102,7 +102,7 @@
  */
 inline void EEPROM_Write_Disable(void)
 {
-    digitalWrite(EP_WP_PIN, HIGH);
+	digitalWrite(EP_WP_PIN, HIGH);
 }
 
 /*
@@ -112,100 +112,100 @@ inline void EEPROM_Write_Disable(void)
  */
 inline void EEPROM_Write_Enable(void)
 {
-    digitalWrite(EP_WP_PIN, LOW);
+	digitalWrite(EP_WP_PIN, LOW);
 }
 
-class EEPROM_Operations : protected AT24Cxx{
+class EEPROM_Operations : protected AT24Cxx {
 public:
-    void EEPROM_GPIO_Config(void);
+	void EEPROM_GPIO_Config(void);
 };
 
-class SN_Operations : public EEPROM_Operations{
+class SN_Operations : public EEPROM_Operations {
 public:
-    bool Save_SN_Code(unsigned char *sn_code);
-    bool Save_BKP_SN_Code(unsigned char *sn_code);
-    bool Read_SN_Code(unsigned char *sn_code);
-    bool Read_BKP_SN_Code(unsigned char *sn_code);
-    bool Verify_Save_SN_Code(void);
-    bool Verify_Save_BKP_SN_Code(void);
-    bool Clear_SN_Save_Flag(void);
-    bool Clear_BKP_SN_Save_Flag(void);
-    bool Set_SN_Access_Network_Flag(void);
-    bool Clear_SN_Access_Network_Flag(void);
-    bool Verify_SN_Access_Network_Flag(void);
-    bool Self_check(unsigned char *dat);
+	bool Save_SN_Code(unsigned char *sn_code);
+	bool Save_BKP_SN_Code(unsigned char *sn_code);
+	bool Read_SN_Code(unsigned char *sn_code);
+	bool Read_BKP_SN_Code(unsigned char *sn_code);
+	bool Verify_Save_SN_Code(void);
+	bool Verify_Save_BKP_SN_Code(void);
+	bool Clear_SN_Save_Flag(void);
+	bool Clear_BKP_SN_Save_Flag(void);
+	bool Set_SN_Access_Network_Flag(void);
+	bool Clear_SN_Access_Network_Flag(void);
+	bool Verify_SN_Access_Network_Flag(void);
+	bool Self_check(unsigned char *dat);
 
-    void Read_Random_Seed(unsigned char *random_seed);
+	void Read_Random_Seed(unsigned char *random_seed);
 };
 
-class LoRa_Config : public EEPROM_Operations{
+class LoRa_Config : public EEPROM_Operations {
 public:
-    bool Save_LoRa_Config_Flag(void);
-    bool Verify_LoRa_Config_Flag(void);
-    bool Clear_LoRa_Config_Flag(void);
+	bool Save_LoRa_Config_Flag(void);
+	bool Verify_LoRa_Config_Flag(void);
+	bool Clear_LoRa_Config_Flag(void);
 
-    bool Save_LoRa_Com_Mode_Flag(void);
-    bool Clear_LoRa_Com_Mode_Flag(void);
-    bool Save_LoRa_Com_Mode(unsigned char mode);
-    unsigned char Read_LoRa_Com_Mode(void);
+	bool Save_LoRa_Com_Mode_Flag(void);
+	bool Clear_LoRa_Com_Mode_Flag(void);
+	bool Save_LoRa_Com_Mode(unsigned char mode);
+	unsigned char Read_LoRa_Com_Mode(void);
 
-    void Clear_LoRa_Addr_Flag(void);
-    void Save_LoRa_Addr_Flag(void);
-    bool Verify_LoRa_Addr_Flag(void);
-    bool Read_LoRa_Addr(unsigned char *addr);
-    bool Save_LoRa_Addr(unsigned char *addr);
+	void Clear_LoRa_Addr_Flag(void);
+	void Save_LoRa_Addr_Flag(void);
+	bool Verify_LoRa_Addr_Flag(void);
+	bool Read_LoRa_Addr(unsigned char *addr);
+	bool Save_LoRa_Addr(unsigned char *addr);
 };
 
-class Soft_Hard_Vertion : public EEPROM_Operations{
+class Soft_Hard_Vertion : public EEPROM_Operations {
 public:
-    void Save_hardware_version(unsigned char number_high, unsigned char number_low);
-    void Save_Software_version(unsigned char number_high, unsigned char number_low);
+	void Save_hardware_version(unsigned char number_high, unsigned char number_low);
+	void Save_Software_version(unsigned char number_high, unsigned char number_low);
 };
 
-class Roll_Operations : public EEPROM_Operations{
+class Roll_Operations : public EEPROM_Operations {
 public:
-    bool Set_Route_Save_Flag(void);
-    bool Read_Route_Save_Flag(void);
-    bool Clear_Route_Save_Flag(void);
+	bool Set_Route_Save_Flag(void);
+	bool Read_Route_Save_Flag(void);
+	bool Clear_Route_Save_Flag(void);
 
-    bool Save_Rolling_Time(unsigned int time);
-    unsigned int Read_Rolling_Time(void);
+	bool Save_Rolling_Time(unsigned int time);
+	unsigned int Read_Rolling_Time(void);
 
-    bool Save_Last_Opening_Value(unsigned char opening_value);
-    bool Save_Current_Opening_Value(unsigned char opening);
-    bool Save_RealTime_Opening_Value(unsigned char opening);
-    unsigned char Read_Last_Opening_Value(void);
-    unsigned char Read_Current_Opening_Value(void);
-    unsigned char Read_RealTime_Opening_Value(void);
-    bool Clear_All_Opening_Value(void);
+	bool Save_Last_Opening_Value(unsigned char opening_value);
+	bool Save_Current_Opening_Value(unsigned char opening);
+	bool Save_RealTime_Opening_Value(unsigned char opening);
+	unsigned char Read_Last_Opening_Value(void);
+	unsigned char Read_Current_Opening_Value(void);
+	unsigned char Read_RealTime_Opening_Value(void);
+	bool Clear_All_Opening_Value(void);
 
-    bool Save_Group_Number(unsigned char *group_num);
-    bool Read_Group_Number(unsigned char *group_num);
-    bool Check_Group_Number(void);
-    bool Verify_Group_Number_Flag(void);
-    bool Clear_Group_Number(void);
+	bool Save_Group_Number(unsigned char *group_num);
+	bool Read_Group_Number(unsigned char *group_num);
+	bool Check_Group_Number(void);
+	bool Verify_Group_Number_Flag(void);
+	bool Clear_Group_Number(void);
 
-    bool Save_Area_Number(unsigned char area_num);
-    unsigned char Read_Area_Number(void);
-    bool Check_Area_Number(void);
-    bool Verify_Area_Number_Flag(void);
-    bool Clear_Area_Number(void);
+	bool Save_Area_Number(unsigned char area_num);
+	unsigned char Read_Area_Number(void);
+	bool Check_Area_Number(void);
+	bool Verify_Area_Number_Flag(void);
+	bool Clear_Area_Number(void);
 
-    bool Save_Roll_Work_Voltage_and_Report_Interval(unsigned char *voltage_value);
-    unsigned char Read_Roll_Low_Voltage_Limit_Value(void);
-    unsigned char Read_Roll_High_Current_Limit_Value(void);
-    unsigned char Read_Roll_Report_Status_Interval_Value(void);
+	bool Save_Roll_Work_Voltage_and_Report_Interval(unsigned char *voltage_value);
+	unsigned char Read_Roll_Low_Voltage_Limit_Value(void);
+	unsigned char Read_Roll_High_Current_Limit_Value(void);
+	unsigned char Read_Roll_Report_Status_Interval_Value(void);
 
-    bool Save_Roll_Voltage(unsigned int voltage);
-    bool Read_Roll_Voltage(unsigned int *voltage);
+	bool Save_Roll_Voltage(unsigned int voltage);
+	bool Read_Roll_Voltage(unsigned int *voltage);
 
-    bool Save_Roll_Up_Current(unsigned int current);
-    bool Read_Roll_Up_Current(unsigned int *current);
-    bool Save_Roll_Down_Current(unsigned int current);
-    bool Read_Roll_Down_Current(unsigned int *current);
-    bool Verify_Current_Flag(void);
-    bool Clear_Current_Flag(void);
-    bool Current_Self_Check(void);
+	bool Save_Roll_Up_Current(unsigned int current);
+	bool Read_Roll_Up_Current(unsigned int *current);
+	bool Save_Roll_Down_Current(unsigned int current);
+	bool Read_Roll_Down_Current(unsigned int *current);
+	bool Verify_Current_Flag(void);
+	bool Clear_Current_Flag(void);
+	bool Current_Self_Check(void);
 };
 
 /*Create EEPROM object*/

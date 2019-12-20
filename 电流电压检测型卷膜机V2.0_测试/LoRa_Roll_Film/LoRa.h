@@ -69,50 +69,50 @@
 
 #define AT_CONFIG_PARA(at, para)    at#para"\r\n"
 
-enum LoRa_Mode{
-    AT = 0, PASS_THROUGH_MODE
+enum LoRa_Mode {
+	AT = 0, PASS_THROUGH_MODE
 };
 
-enum Receive_Type{
-    OK = 0, ERROR, Bytes, Invalid
+enum Receive_Type {
+	OK = 0, ERROR, Bytes, Invalid
 };
 
-enum Error_Mark{
-    Grammar_Err = 0, Para_Err, Execute_Failed, Channel_Busy, Length_Err, Save_Failed, Buffer_Full, OverTime, Set_Refuse, Unreadable,
-    No_Err
+enum Error_Mark {
+	Grammar_Err = 0, Para_Err, Execute_Failed, Channel_Busy, Length_Err, Save_Failed, Buffer_Full, OverTime, Set_Refuse, Unreadable,
+	No_Err
 };
 
-enum Cmd{
-    CMOMON = 0, CSQ
+enum Cmd {
+	CMOMON = 0, CSQ
 };
 
-class LoRa{
+class LoRa {
 public:
-    void LoRa_GPIO_Config(void);
-    void LoRa_Shutdown(void);
-    void LoRa_Restart(void);
-    void BaudRate(unsigned int baudrate);
-    //AT mode or pass-through mode
-    bool Mode(LoRa_Mode AT_status);
-    void IsReset(bool Is_reset);
-    bool LoRa_AT(unsigned char *data_buffer, bool is_query, const char *cmd, const char *para);
-    
-    bool Rewrite_ID(void);
-    void Parameter_Init(bool only_net);
+	void LoRa_GPIO_Config(void);
+	void LoRa_Shutdown(void);
+	void LoRa_Restart(void);
+	void BaudRate(unsigned int baudrate);
+	//AT mode or pass-through mode
+	bool Mode(LoRa_Mode AT_status);
+	void IsReset(bool Is_reset);
+	bool LoRa_AT(unsigned char *data_buffer, bool is_query, const char *cmd, const char *para);
+
+	bool Rewrite_ID(void);
+	void Parameter_Init(bool only_net);
 
 private:
-    unsigned char Detect_Error_Receipt(unsigned char *verify_data);
-    bool Detect_OK_Receipt(unsigned char *verify_data, unsigned char *data_buffer);
-    //Read LoRa parameters.
-    Receive_Type AT_Query_Cmd(const char *cmd, unsigned char *data_buffer, unsigned char *data_len);
-    //Set LoRa parameters.
-    Receive_Type AT_Config_Cmd(const char *cmd, const char * para, unsigned char *data_buffer);
-    bool Parse_Command(unsigned char *addr_temp, unsigned char len, unsigned char *data_buffer, unsigned char **data_len);
-    //SNR and RSSI
-    void Get_CSQ(unsigned char *addr_temp, unsigned char len, unsigned char *data_buffer);
-    bool String_to_Hex(unsigned char *str, unsigned char len);
+	unsigned char Detect_Error_Receipt(unsigned char *verify_data);
+	bool Detect_OK_Receipt(unsigned char *verify_data, unsigned char *data_buffer);
+	//Read LoRa parameters.
+	Receive_Type AT_Query_Cmd(const char *cmd, unsigned char *data_buffer, unsigned char *data_len);
+	//Set LoRa parameters.
+	Receive_Type AT_Config_Cmd(const char *cmd, const char * para, unsigned char *data_buffer);
+	bool Parse_Command(unsigned char *addr_temp, unsigned char len, unsigned char *data_buffer, unsigned char **data_len);
+	//SNR and RSSI
+	void Get_CSQ(unsigned char *addr_temp, unsigned char len, unsigned char *data_buffer);
+	bool String_to_Hex(unsigned char *str, unsigned char len);
 
-    bool Param_Check(const char *cmd, const char *para, bool only_set);
+	bool Param_Check(const char *cmd, const char *para, bool only_set);
 };
 
 /*Create LoRa object*/

@@ -17,12 +17,12 @@
 /*选择的设备为AT24C02*/
 #define EE_TYPE     AT24C02
 
-class AT24Cxx: public I2C{
+class AT24Cxx : public I2C {
 public:
-    void I2C_Init(void);
+	void I2C_Init(void);
 protected:
-    unsigned char AT24CXX_ReadOneByte(unsigned int addr);
-    void AT24CXX_WriteOneByte(unsigned int addr, unsigned char dt);
+	unsigned char AT24CXX_ReadOneByte(unsigned int addr);
+	void AT24CXX_WriteOneByte(unsigned int addr, unsigned char dt);
 };
 
 extern AT24Cxx AT24C_02;

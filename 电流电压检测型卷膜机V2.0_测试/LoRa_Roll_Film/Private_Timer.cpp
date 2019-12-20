@@ -17,10 +17,10 @@ volatile static unsigned int gSelfCheckNum;
  */
 void Roll_Timer_Init(void)
 {
-  Timer2.setPeriod(TIMER_NUM); // in microseconds，1S
-  Timer2.attachCompare1Interrupt(Timer2_Interrupt);   
-  Timer2.setCount(0);
-  Timer2.pause(); 
+	Timer2.setPeriod(TIMER_NUM); // in microseconds，1S
+	Timer2.attachCompare1Interrupt(Timer2_Interrupt);
+	Timer2.setCount(0);
+	Timer2.pause();
 }
 
 /*
@@ -30,9 +30,9 @@ void Roll_Timer_Init(void)
  */
 void Self_Check_Parameter_Timer_Init(void)
 {
-  Timer3.setPeriod(TIMER_NUM); // in microseconds，1S
-  Timer3.attachCompare1Interrupt(Timer3_Interrupt);   
-  Timer3.setCount(0);
+	Timer3.setPeriod(TIMER_NUM); // in microseconds，1S
+	Timer3.attachCompare1Interrupt(Timer3_Interrupt);
+	Timer3.setCount(0);
 }
 
 /*
@@ -42,10 +42,10 @@ void Self_Check_Parameter_Timer_Init(void)
  */
 void Start_Roll_Timing(void)
 {
-  gRollingTime = 0;
-  gRollingTimeVarFlag = false;
-  Timer2.setCount(0);
-  Timer2.resume();
+	gRollingTime = 0;
+	gRollingTimeVarFlag = false;
+	Timer2.setCount(0);
+	Timer2.resume();
 }
 
 /*
@@ -55,8 +55,8 @@ void Start_Roll_Timing(void)
  */
 void Start_Self_Check_Timing(void)
 {
-  Timer3.resume();
-  Timer3.setCount(0);
+	Timer3.resume();
+	Timer3.setCount(0);
 }
 
 /*
@@ -66,7 +66,7 @@ void Start_Self_Check_Timing(void)
  */
 void Stop_Roll_Timing(void)
 {
-  Timer2.pause();
+	Timer2.pause();
 }
 
 /*
@@ -76,7 +76,7 @@ void Stop_Roll_Timing(void)
  */
 void Stop_Self_Check_Timing(void)
 {
-  Timer3.pause();
+	Timer3.pause();
 }
 
 /*
@@ -86,8 +86,8 @@ void Stop_Self_Check_Timing(void)
  */
 void Timer2_Interrupt(void)
 {
-  gRollingTime++;
-  gRollingTimeVarFlag = true;
+	gRollingTime++;
+	gRollingTimeVarFlag = true;
 }
 
 /*
@@ -97,10 +97,10 @@ void Timer2_Interrupt(void)
  */
 void Timer3_Interrupt(void)
 {
-  gSelfCheckNum++;
-  if (gSelfCheckNum >= 14400) //4 hours
-  {
-      gSelfCheckNum = 0;
-      gCheckStoreParamFlag = true;
-  }
+	gSelfCheckNum++;
+	if (gSelfCheckNum >= 14400) //4 hours
+	{
+		gSelfCheckNum = 0;
+		gCheckStoreParamFlag = true;
+	}
 }

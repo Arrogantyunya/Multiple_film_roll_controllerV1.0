@@ -42,38 +42,38 @@
 
 #include "User_Clock.h"
 
-/*********************************************************************
- * MACROS
- */
+ /*********************************************************************
+  * MACROS
+  */
 
 #define	YearLength(yr)	((U16)(IsLeapYear(yr) ? 366 : 365))
 
-/*********************************************************************
- * CONSTANTS
- */
+  /*********************************************************************
+   * CONSTANTS
+   */
 
 #define	BEGYEAR  2000     //  UTC started at 00:00:00 January 1, 2000
 
 #define	DAY      86400UL  // 24 hours * 60 minutes * 60 seconds
 
-/*********************************************************************
- * TYPEDEFS
- */
+   /*********************************************************************
+	* TYPEDEFS
+	*/
 
-/*********************************************************************
- * GLOBAL VARIABLES
- */
+	/*********************************************************************
+	 * GLOBAL VARIABLES
+	 */
 
-/*********************************************************************
- * EXTERNAL VARIABLES
- */
+	 /*********************************************************************
+	  * EXTERNAL VARIABLES
+	  */
 
-/*********************************************************************
- * EXTERNAL FUNCTIONS
- */
-/*********************************************************************
- * LOCAL VARIABLES
- */
+	  /*********************************************************************
+	   * EXTERNAL FUNCTIONS
+	   */
+	   /*********************************************************************
+		* LOCAL VARIABLES
+		*/
 static U32 previousMacTimerTick = 0;
 static U16 remUsTicks = 0;
 static U16 timeMSec = 0;
@@ -85,9 +85,9 @@ UTCTime OSAL_timeSeconds = 0;
 /*********************************************************************
  * LOCAL FUNCTION PROTOTYPES
  */
-static U8 monthLength( U8 lpyr, U8 mon );
+static U8 monthLength(U8 lpyr, U8 mon);
 
-static void osalClockUpdate( U16 elapsedMSec );
+static void osalClockUpdate(U16 elapsedMSec);
 
 
 
@@ -100,19 +100,19 @@ static void osalClockUpdate( U16 elapsedMSec );
  *
  * @return  none
  */
-static void osalClockUpdate( U16 elapsedMSec )
+static void osalClockUpdate(U16 elapsedMSec)
 {
-  // Add elapsed milliseconds to the saved millisecond portion of time
-  /*
-  timeMSec += elapsedMSec;
-  // Roll up milliseconds to the number of seconds
-  if ( timeMSec >= 1000 )
-  {
-    OSAL_timeSeconds += timeMSec / 1000;
-    timeMSec = timeMSec % 1000;
-  }
-  */
-  OSAL_timeSeconds+=1;
+	// Add elapsed milliseconds to the saved millisecond portion of time
+	/*
+	timeMSec += elapsedMSec;
+	// Roll up milliseconds to the number of seconds
+	if ( timeMSec >= 1000 )
+	{
+	  OSAL_timeSeconds += timeMSec / 1000;
+	  timeMSec = timeMSec % 1000;
+	}
+	*/
+	OSAL_timeSeconds += 1;
 }
 
 /*********************************************************************
@@ -126,9 +126,9 @@ static void osalClockUpdate( U16 elapsedMSec )
  *
  * @return  none
  */
-void osal_setClock( UTCTime newTime )
+void osal_setClock(UTCTime newTime)
 {
-  OSAL_timeSeconds = newTime;
+	OSAL_timeSeconds = newTime;
 }
 
 /*********************************************************************
@@ -143,17 +143,17 @@ void osal_setClock( UTCTime newTime )
  * @return  number of seconds since 0 hrs, 0 minutes, 0 seconds,
  *          on the 1st of January 2000 UTC
  */
-UTCTime osal_getClock( void )
+UTCTime osal_getClock(void)
 {
-  return ( OSAL_timeSeconds );
+	return (OSAL_timeSeconds);
 }
 
-  /*
-   * Updates the OSAL clock and Timers from the MAC 320us timer tick.
-   */
-void osalTimeUpdate( void )
+/*
+ * Updates the OSAL clock and Timers from the MAC 320us timer tick.
+ */
+void osalTimeUpdate(void)
 {
-  OSAL_timeSeconds++;
+	OSAL_timeSeconds++;
 }
 /*********************************************************************
  * @fn      osal_ConvertUTCTime
@@ -167,37 +167,37 @@ void osalTimeUpdate( void )
  *
  * @return  none
  */
-void osal_ConvertUTCTime( UTCTimeStruct *tm, UTCTime secTime )
+void osal_ConvertUTCTime(UTCTimeStruct *tm, UTCTime secTime)
 {
-  // calculate the time less than a day - hours, minutes, seconds
-  {
-    U32 day = secTime % DAY;
-    tm->seconds = day % 60UL;
-    tm->minutes = (day % 3600UL) / 60UL;
-    tm->hour = day / 3600UL;
-  }
+	// calculate the time less than a day - hours, minutes, seconds
+	{
+		U32 day = secTime % DAY;
+		tm->seconds = day % 60UL;
+		tm->minutes = (day % 3600UL) / 60UL;
+		tm->hour = day / 3600UL;
+	}
 
-  // Fill in the calendar - day, month, year
-  {
-    U16 numDays = secTime / DAY;
-    tm->year = BEGYEAR;
-    while ( numDays >= YearLength( tm->year ) )
-    {
-      numDays -= YearLength( tm->year );
-      tm->year++;
-    }
+	// Fill in the calendar - day, month, year
+	{
+		U16 numDays = secTime / DAY;
+		tm->year = BEGYEAR;
+		while (numDays >= YearLength(tm->year))
+		{
+			numDays -= YearLength(tm->year);
+			tm->year++;
+		}
 
-    tm->month = 0;
-    while ( numDays >= monthLength( IsLeapYear( tm->year ), tm->month ) )
-    {
-      numDays -= monthLength( IsLeapYear( tm->year ), tm->month );
-      tm->month++;
-    }
+		tm->month = 0;
+		while (numDays >= monthLength(IsLeapYear(tm->year), tm->month))
+		{
+			numDays -= monthLength(IsLeapYear(tm->year), tm->month);
+			tm->month++;
+		}
 
-    tm->day = numDays;
-  }
-  tm->day+=1;
-  tm->month+=1;
+		tm->day = numDays;
+	}
+	tm->day += 1;
+	tm->month += 1;
 }
 
 /*********************************************************************
@@ -209,28 +209,28 @@ void osal_ConvertUTCTime( UTCTimeStruct *tm, UTCTime secTime )
  *
  * @return  number of days in specified month
  */
-static U8 monthLength( U8 lpyr, U8 mon )
+static U8 monthLength(U8 lpyr, U8 mon)
 {
-  U8 days = 31;
+	U8 days = 31;
 
-	if ( mon == 1 ) // feb
-  {
-		days = ( 28 + lpyr );
-  }
-  else
-  {
-    if ( mon > 6 ) // aug-dec
-    {
-      mon--;
-    }
+	if (mon == 1) // feb
+	{
+		days = (28 + lpyr);
+	}
+	else
+	{
+		if (mon > 6) // aug-dec
+		{
+			mon--;
+		}
 
-    if ( mon & 1 )
-    {
-      days = 30;
-    }
-  }
+		if (mon & 1)
+		{
+			days = 30;
+		}
+	}
 
-	return ( days );
+	return (days);
 }
 
 /*********************************************************************
@@ -242,39 +242,39 @@ static U8 monthLength( U8 lpyr, U8 mon )
  *
  * @return  number of seconds since 00:00:00 on 01/01/2000 (UTC)
  */
-UTCTime osal_ConvertUTCSecs( UTCTimeStruct *tm )
+UTCTime osal_ConvertUTCSecs(UTCTimeStruct *tm)
 {
-  U32 seconds;
-  tm->day-=1;
-  tm->month-=1;
-  /* Seconds for the partial day */
-  seconds = (((tm->hour * 60UL) + tm->minutes) * 60UL) + tm->seconds;
+	U32 seconds;
+	tm->day -= 1;
+	tm->month -= 1;
+	/* Seconds for the partial day */
+	seconds = (((tm->hour * 60UL) + tm->minutes) * 60UL) + tm->seconds;
 
-  /* Account for previous complete days */
-  {
-    /* Start with complete days in current month */
-    U16 days = tm->day;
+	/* Account for previous complete days */
+	{
+		/* Start with complete days in current month */
+		U16 days = tm->day;
 
-    /* Next, complete months in current year */
-    {
-      signed int month = tm->month;
-      while ( --month >= 0 )
-      {
-        days += monthLength( IsLeapYear( tm->year ), month );
-      }
-    }
+		/* Next, complete months in current year */
+		{
+			signed int month = tm->month;
+			while (--month >= 0)
+			{
+				days += monthLength(IsLeapYear(tm->year), month);
+			}
+		}
 
-    /* Next, complete years before current year */
-    {
-      U16 year = tm->year;
-      while ( --year >= BEGYEAR )
-      {
-        days += YearLength( year );
-      }
-    }
+		/* Next, complete years before current year */
+		{
+			U16 year = tm->year;
+			while (--year >= BEGYEAR)
+			{
+				days += YearLength(year);
+			}
+		}
 
-    /* Add total seconds before partial day */
-    seconds += (days * DAY);
-  }
-  return ( seconds );
+		/* Add total seconds before partial day */
+		seconds += (days * DAY);
+	}
+	return (seconds);
 }
