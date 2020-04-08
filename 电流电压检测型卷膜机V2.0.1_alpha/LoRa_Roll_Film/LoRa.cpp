@@ -599,9 +599,9 @@ void LoRa::Parameter_Init(bool only_net)
             StatusBuffer[i++] = Rewrite_ID();
             StatusBuffer[i++] = Param_Check(AT_MADDR_, "71000000", false);
             StatusBuffer[i++] = Param_Check(AT_RIQ_, "00", true); 
-            StatusBuffer[i++] = Param_Check(AT_TFREQ_, "1C578DE0", false);
-            StatusBuffer[i++] = Param_Check(AT_RFREQ_, "1C03AE80", false);
-            StatusBuffer[i++] = Param_Check(AT_SYNC_, "34", false);
+            StatusBuffer[i++] = Param_Check(AT_TFREQ_, "1C4FECC0", false);
+            StatusBuffer[i++] = Param_Check(AT_RFREQ_, "1C083560", false);
+            StatusBuffer[i++] = Param_Check(AT_SYNC_, "12", false);
 
             #if USE_LORA_RESET
             if (LoRa_Para_Config.Read_LoRa_Com_Mode() == 0xF1)
